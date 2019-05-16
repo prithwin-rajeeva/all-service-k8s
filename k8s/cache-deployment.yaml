@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: cache-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: cache
+  template:
+    spec:
+      containers:
+        - name: as-cache
+          image: prithwin/as-cache:1.0
+          ports:
+            - containerPort: 6379
+    metadata:
+      labels:
+        component: cache

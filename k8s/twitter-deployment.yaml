@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: twitter-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: twitter
+  template:
+    spec:
+      containers:
+        - name: all-service
+          env:
+            - name: EVO_ENABLED
+              value: "false"
+          image: prithwin/all-service:1.0
+          ports:
+            - containerPort: 9000
+    metadata:
+      labels:
+        component: twitter

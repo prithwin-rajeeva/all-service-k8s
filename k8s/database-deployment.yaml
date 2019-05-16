@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: database-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: database
+  template:
+    spec:
+      volumes:
+        - name: as-database-storage
+          persistentVolumeClaim:
+            claimName: database-pvc
+      containers:
+        - name: as-databsae
+          image: prithwin/as-database:1.0
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: as-database-storage
+    metadata:
+      labels:
+        component: database

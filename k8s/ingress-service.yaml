@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /health_check
+            backend:
+              serviceName: twitter
+              servicePort: 9000
+          - path: /chat
+            backend:
+              serviceName: snapchat
+              servicePort: 9000
+          - path: /chats
+            backend:
+              serviceName: snapchat
+              servicePort: 9000
+          - path: /user
+            backend:
+             serviceName: twitter
+             servicePort: 9000
+          - path: /start
+            backend:
+              serviceName: twitter
+              servicePort: 9000
+          - path: /follow
+            backend:
+              serviceName: twitter
+              servicePort: 9000

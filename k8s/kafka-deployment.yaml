@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: kafka-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: as-commit-log
+  template:
+    spec:
+      containers:
+        - name: as-commit-log
+          image: prithwin/as-commit-log:1.0
+          env:
+            - name: ADVERTISED_HOST
+              value: kafka
+            - name: ADVERTISED_PORT
+              value: "9092"
+          ports:
+            - containerPort: 9092
+            - containerPort: 2181
+    metadata:
+      labels:
+        component: as-commit-log
